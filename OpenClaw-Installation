@@ -1,0 +1,10 @@
+Detection of the installation of OpenClaw
+
+DeviceProcessEvents
+| where Timestamp > ago(30d)
+| where ProcessCommandLine has "https://openclaw[.]ai"
+or ProcessCommandLine has "https://github[.]com/openclaw/"
+or (FileName == "node"
+ and ProcessCommandLine has "install" and ProcessCommandLine has "openclaw")
+| project Timestamp, DeviceName, InitiatingProcessCommandLine, ProcessCommandLine
+| sort by Timestamp desc
