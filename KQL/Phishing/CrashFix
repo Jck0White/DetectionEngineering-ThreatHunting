@@ -1,0 +1,7 @@
+let C2IPS = dynamic(["170.168.103.208", "199.217.98.108", "158.247.252.178" ]);
+union DeviceNetworkEvents, DeviceProcessEvents, DeviceFileEvents
+| where RemoteIP has_any (C2IPS) 
+            or ProcessCommandLine has_any (C2IPS) 
+            or RemoteUrl has "nexsnield.com"
+            or SHA256 == "fbfce492d1aa458c0ccc8ce4611f0e2d00913c8d51b5016ce60a7f59db67de67"
+// reference: https://www.huntress.com/blog/malicious-browser-extention-crashfix-kongtuke?utm_source=linkedin&utm_medium=social&utm_campaign=cy26-q1-brand-na-broad-all-x&utm_content=Video
