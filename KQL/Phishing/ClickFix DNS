@@ -1,0 +1,8 @@
+DeviceRegistryEvents
+| where InitiatingProcessParentFileName =~ "userinit.exe" and ActionType == "RegistryValueSet"
+| where RegistryKey endswith @"Microsoft\Windows\CurrentVersion\Explorer\RunMRU"
+//looks for any pattern of nslookup or it being obsfucated
+| where RegistryValueData matches regex @"(?i)\bn[^a-z0-9\s]*s[^a-z0-9\s]*l[^a-z0-9\s]*o[^a-z0-9\s]*o[^a-z0-9\s]*k[^a-z0-9\s]*u[^a-z0-9\s]*p\b"
+| project Timestamp, ActionType, InitiatingProcessParentFileName, RegistryKey, RegistryValueData
+| order by Timestamp desc 
+//reference: https://www.bleepingcomputer.com/news/security/new-clickfix-attack-abuses-nslookup-to-retrieve-powershell-payload-via-dns/
