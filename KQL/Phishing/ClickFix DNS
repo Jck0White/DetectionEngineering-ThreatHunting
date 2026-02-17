@@ -6,3 +6,6 @@ DeviceRegistryEvents
 | project Timestamp, ActionType, InitiatingProcessParentFileName, RegistryKey, RegistryValueData
 | order by Timestamp desc 
 //reference: https://www.bleepingcomputer.com/news/security/new-clickfix-attack-abuses-nslookup-to-retrieve-powershell-payload-via-dns/
+
+
+//regex test: https://regex101.com/r/1blZ57/1
